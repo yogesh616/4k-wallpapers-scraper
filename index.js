@@ -11,9 +11,7 @@ app.use(cors({
 }));
 
 
-app.get('/', function (req, res) {
-  res.sendFile(filePath);
-});
+
 app.post('/api', async (req, res) => {
     const { prompt } = req.body;
     if (!prompt) {
@@ -54,24 +52,7 @@ app.post('/api', async (req, res) => {
         
         res.json({vectorData: vectorData});
      
-        let html = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Wallpapers</title>
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <div class="wallpapers">
-        `;
-        
-   vectorData.forEach((data)=> {
-   html += `<a href=${imgDownloadURI + data.imgId}><img src=${data.src} /></a>`
-   })
-   
-
+      
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'An error occurred while fetching data.' });
