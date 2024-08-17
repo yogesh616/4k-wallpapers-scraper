@@ -3,14 +3,13 @@ const cors = require('cors');
 const cheerio = require('cheerio');
 const app = express();
 const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
+
 
 app.use(express.json());
 app.use(cors({
     origin: '*'
 }));
-const filePath = path.join(__dirname, 'index.html');
+
 
 app.get('/', function (req, res) {
   res.sendFile(filePath);
@@ -72,15 +71,6 @@ app.post('/api', async (req, res) => {
    html += `<a href=${imgDownloadURI + data.imgId}><img src=${data.src} /></a>`
    })
    
-
-        // Write the scraped content to an HTML file
-        fs.writeFile(filePath, html, (err) => {
-            if (err) throw err;
-           
-          
-        });
-
-
 
     } catch (error) {
         console.error('Error:', error);
